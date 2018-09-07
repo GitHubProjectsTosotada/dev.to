@@ -5,6 +5,7 @@ import OnboardingFollowUsers from './components/OnboardingFollowUsers';
 import OnboardingWelcomeThread from './components/OnboardingWelcomeThread';
 import cancelSvg from '../../assets/images/cancel.svg';
 import OnboardingArticles from './components/OnboardingArticles';
+import OnboardingProfile from './components/OnboardingProfile';
 
 class Onboarding extends Component {
   constructor() {
@@ -254,7 +255,7 @@ class Onboarding extends Component {
       this.getUsersToFollow();
       this.getSuggestedArticles();
     }
-    if (this.state.pageNumber < 5) {
+    if (this.state.pageNumber < 6) {
       this.setState({ pageNumber: this.state.pageNumber + 1 });
       if (this.state.pageNumber === 4 && this.state.checkedUsers.length > 0) {
         this.handleBulkFollowUsers(this.state.checkedUsers);
@@ -332,6 +333,8 @@ class Onboarding extends Component {
       );
     } else if (this.state.pageNumber === 5) {
       return <OnboardingWelcomeThread />;
+    } else if (this.state.pageNumber === 6) {
+      return <OnboardingProfile />;
     }
   }
 
@@ -354,7 +357,7 @@ class Onboarding extends Component {
         onMouseOver={this.handleNextHover}
         onFocus={this.handleNextHover}
       >
-        {this.state.pageNumber < 5 ? 'NEXT' : "LET'S GO"}
+        {this.state.pageNumber < 6 ? 'NEXT' : "LET'S GO"}
       </button>
     );
   }
@@ -366,6 +369,7 @@ class Onboarding extends Component {
       3: 'FOLLOW SOME DEVS!',
       4: 'SAVE SOME POSTS!',
       5: 'GET INVOLVED!',
+      6: 'PROFILE',
     };
     return messages[this.state.pageNumber];
   }
